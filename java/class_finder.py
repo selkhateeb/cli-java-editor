@@ -52,7 +52,13 @@ def find_java_class(class_name_pattern='*', path='.'):
     '''
     ptrn = class_name_pattern.replace('*', '.*')
     ptrn = re.sub(r'([A-Z])', r'.*\1.*', ptrn)
-    return _find_files(re_pattern='.*/src/.+' + ptrn + '.*\.java$', path=path)
+    print "'%s'" % ptrn
+    if ptrn.endswith(' '):
+        ptrn = ptrn.replace(' ', '')
+    else:
+        ptrn += '.*'
+
+    return _find_files(re_pattern='.*/src/.+' + ptrn + '\.java$', path=path)
 
 
 # Utilities
